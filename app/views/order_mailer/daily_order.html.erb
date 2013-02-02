@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+	<h1>Bestellung Know-Center für <%= l(@day, :format => :complete) %></h1>
+	<ul>
+		<% @orders.group_by{ |order| order.menu_item.name }.each do |menu_item_name, orders_by_menu_item| %>
+			<li style="font-weight: bold;"><%= orders_by_menu_item.length %> x <%= menu_item_name %></li>
+		<% end # /orders_by_menu_item %>
+	</ul>
+  </body>
+</html>

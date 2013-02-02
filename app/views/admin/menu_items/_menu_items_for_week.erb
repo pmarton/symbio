@@ -1,0 +1,43 @@
+<%
+# Load all existing menu items
+menu_items_array = MenuItem.where(:date => date).order("date, sort_order")
+current_menu_item = menu_items_array.shift 
+
+# Iterate through all days in the given date range
+date.each do |day| %>
+
+	<% if day.today? then menu_class = :box end %>
+
+	<%= content_tag :div, :class => menu_class do %>
+	
+	<h3><%= l(day, :format => :complete) %></h3>
+
+	<ul>
+	<% MealCategory.order(:sort_order).each do |meal_category| %>
+
+		<%= form_for MenuItem.new, :url => {:action => :create, :format => :json}, :remote => true do |f| %>
+
+			<li class="editable_menu_item">
+			<%= f.label meal_category.name %>:
+
+			<% if !current_menu_item.nil? && current_menu_item.date == day && current_menu_item.meal_category_id.to_i == meal_category.id.to_i %>
+				<span class="click_to_edit" title="Click to edit!"><%= current_menu_item.name %></span>
+				<%= text_field_tag :name, current_menu_item.name, :style => 'display: none;', :autocomplete => autocomplete_menu_item_name_admin_menu_items_path %>
+				<input name="menu_item[<%= day.to_time.to_i.to_s + meal_category.id.to_s %>][id]" type="hidden" value="<%= current_menu_item.id %>" />
+				<% current_menu_item = menu_items_array.shift %>
+			<% else %>
+				<span class="click_to_edit" title="Click to edit!"></span>
+				<%= text_field_tag :name, '', :autocomplete => autocomplete_menu_item_name_admin_menu_items_path %>
+			<% end %>
+
+			<input name="menu_item[<%= day.to_time.to_i.to_s + meal_category.id.to_s %>][meal_category_id]" type="hidden" value="<%= meal_category.id.to_s %>" />
+			<input name="menu_item[<%= day.to_time.to_i.to_s + meal_category.id.to_s %>][date]" type="hidden" value="<%= day %>" />
+			</li>
+
+		<% end %>
+
+	<% end # /each %>
+	</ul>
+
+	<% end # /content_tag %>
+<% end # /each %>

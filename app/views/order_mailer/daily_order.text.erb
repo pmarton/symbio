@@ -1,0 +1,6 @@
+Bestellung Know-Center für <%= l(@day, :format => :complete) %>
+===============================================
+ 
+<% @orders.group_by{ |order| order.menu_item.name }.each do |menu_item_name, orders_by_menu_item| %>
+	* <%= orders_by_menu_item.length %> x <%= menu_item_name %>
+<% end # /orders_by_menu_item %>

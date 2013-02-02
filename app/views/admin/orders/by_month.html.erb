@@ -1,0 +1,5 @@
+<div class="span-24 last">
+
+	<%= render :partial => 'orders_for_month', :locals => { :date => (Time.current.to_date.beginning_of_month - 1.day).beginning_of_month } %>
+	
+</div>

@@ -1,0 +1,40 @@
+de-AT:
+  errors:
+    messages:
+      not_found: "nicht gefunden!"
+      already_confirmed: "ist bereits bestätigt!"
+      # not_locked: "war nicht gesperrt"
+
+  devise:
+    failure:
+      unauthenticated: 'Bitte zuerst anmelden oder registrieren!'
+      unconfirmed: 'Bitte zuerst deinen Account bestätigen! Du solltest eine E-Mail erhalten haben ...'
+      # locked: 'Dein Account ist gesperrt.'
+      invalid: 'E-Mail-Adresse oder Passwort inkorrekt!'
+      invalid_token: 'Bestätigungs-Code ungültig!'
+      timeout: 'Deine Sitzung ist abgelaufen, bitte nochmal anmelden ...'
+      inactive: 'Dein Account wurde noch nicht aktiviert ...'
+    sessions:
+      user:
+        signed_in: 'Herzlich Willkommen!'
+        signed_out: 'Bis bald!'
+    passwords:
+      send_instructions: 'Die E-Mail mit der Anleitung zum Rücksetzen deines Passwortes ist unterwegs!'
+      updated: 'Dein Passwort wurde erfolgreich geändert!'
+    confirmations:
+      send_instructions: 'Die E-Mail mit der Anleitung zum Bestätigen deines Accounts ist unterwegs!'
+      confirmed: 'Dein Account wurde erfolgreich bestätigt!'
+    registrations:
+      signed_up_but_unconfirmed: 'Du hast dich erfolgreich registriert, deine Bestätigungs-Mail ist unterwegs!'
+      updated: 'Dein Account wurde erfolgreich aktualisiert!'
+      # destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
+    # unlocks:
+      # send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
+      # unlocked: 'Your account was successfully unlocked. You are now signed in.'
+    mailer:
+      confirmation_instructions:
+        subject: '[symbio] Account bestätigen'
+      reset_password_instructions:
+        subject: '[symbio] Passwort zurücksetzen'
+      # unlock_instructions:
+        # subject: 'Unlock Instructions'

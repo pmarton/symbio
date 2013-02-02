@@ -1,0 +1,50 @@
+<div class="span-24 last">
+<h2>Rechnungsübersicht</h2>
+<% if @invoice_item_months %>
+<% 
+price = 0
+total = 0
+%>
+
+<% @invoice_item_months.each do |month, items| %>
+<h3><%= l(month, :format => :month_year) %></h3>
+<table>
+    <tr style="border-bottom: 1px solid grey;">
+        <th>
+            Datum
+        </th>
+        <th>
+            Bestellung
+        </th>
+        <th>
+            Gesamtpreis
+        </th>
+    </tr>
+    <% items.each do |item| %>
+    <tr class="<%= cycle("even", "odd") -%>">
+        <td>
+            <%= l(item.date) %>
+        </td>
+        <td>
+            <%= item.list_categories %>
+        </td>
+        <td>
+            € <%= number_with_precision (item.price - item.rebate) %>
+            <% total += item.price - item.rebate %>
+        </td>
+    </tr>
+    <% end %>
+    <tr style="border-top: 1px solid grey;">
+      <td colspan="2" style="font-weight: bold;">Summe</td>
+      <td style="font-weight: bold;">€ <%= number_with_precision total %></td>
+  </tr>
+</table>
+<% 
+price = 0
+total = 0
+%>
+<% reset_cycle() %>
+<% end %>
+<% else %>
+Noch keine Rechnungen vorhanden!<% end %>
+</div>

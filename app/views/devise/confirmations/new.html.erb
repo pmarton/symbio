@@ -1,0 +1,28 @@
+<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+
+<div class="span-5 prepend-2">
+
+	<h3>Bestätigungs-Mail erneut zusenden</h3>
+	
+</div>
+
+<div class="span-10 append-7 last">
+	
+	<% if resource.errors.size > 0 %>
+		<ul>
+		<% resource.errors.full_messages.each do |msg| %>
+	      <li><%= msg %></li>
+	    <% end %>
+		</ul>
+	<% end %>
+
+	<p><%= f.label :email, "E-Mail" %><br />
+	<%= f.text_field :email, :class => "text span-5", :autofocus => true %></p>
+
+	<p><%= f.submit "Bestätigungs-Mail erneut zusenden" %></p>
+
+	<p style="margin-top: 26px;"><%= render :partial => "devise/shared/links" %></p>
+
+</div>
+
+<% end %>

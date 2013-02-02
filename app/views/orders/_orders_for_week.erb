@@ -1,0 +1,43 @@
+<% 
+# Get all orders for the week starting with the given date
+orders = Order.includes(:user, :menu_item).where(:date => date..(date + 14.days), :state => ['new', 'ordered']).order('orders.date ASC, menu_items.sort_order ASC, users.name ASC')
+
+# Only display if there are actually any orders in the given week
+if orders.length > 0
+
+	# Group the orders by date
+	grouped_orders = orders.group_by{ |orders| orders.date }
+	%>
+
+	<h2>Bestellübersicht</h2>
+
+	<% grouped_orders.each do |day, orders_by_day| %>
+
+		<% if day.today? then menu_class = :box end %>
+
+		<%= content_tag :div, :class => menu_class do %>
+
+			<%
+			# Check if the orders are already confirmed
+			preliminary_string = (!orders_by_day[0].nil? && orders_by_day[0].state == "new") ? " (vorläufig)" : ""
+			%>
+
+			<h3><%= l(day, :format => :complete) %> <span class="orders_per_day" style="font-size: 80%;" title="Anzahl der Bestellenden">(<%= InvoiceItem.orders_per_day(day) %>)</span><span style="font-size: 80%"><%= preliminary_string %></span></h3>
+
+			<ul>
+			<% orders_by_day.group_by{ |order| order.menu_item.name }.each do |menu_item_name, orders_by_menu_item| %>
+				<li style="font-weight: bold;"><%= orders_by_menu_item.length %> x <%= menu_item_name %></li>
+			<% end # /orders_by_menu_item %>
+			</ul>
+
+			<ul>
+			<% orders_by_day.group_by{ |order| order.user.name }.sort.each do |user_name, orders_by_user| %>
+				<li><%= user_name %>: <%= orders_by_user.collect{ |order| order.menu_item.name }.join("; ") %></li>
+			<% end # /orders_by_user %>
+			</ul>
+
+		<% end # /content_tag %>
+
+	<% end # /orders_by_day %>
+
+<% end # /if %>

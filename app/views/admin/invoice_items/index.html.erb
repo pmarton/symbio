@@ -1,0 +1,65 @@
+<div class="span-24 last">
+<h2>Rechnungsübersicht</h2>
+<% if @invoice_items_months %>
+<%
+  count = 0
+  price = 0
+  total = 0
+
+  user_price = 0
+  user_total = 0
+%>
+<% @invoice_items_months.each do |month, items| %>
+<h3><%= l(month, :format => :month_year) %></h3>
+<table>
+    <tr style="border-bottom: 1px solid grey;">
+        <th>
+            Besteller
+        </th>
+        <th>
+            Anzahl Bestellungen
+        </th>
+        <th>
+            Gesamtpreis
+        </th>
+    </tr>
+    <% items_grouped = items.group_by {|item| item.user} %>
+    <% items_grouped.each do |user, items| %>
+        <% items.each do |item| %>
+            <% user_price += item.price - item.rebate %>
+            <% user_total += item.price - item.rebate %>
+        <% end %>
+    <tr class="<%= cycle("even", "odd") -%>">
+        <td>
+            <%= user.name %>
+        </td>
+        <td>
+            <%= items.size %>
+            <% count += items.size %>
+        </td>
+        <td>
+            € <%= number_with_precision user_total %>
+            <% total += user_total %>
+        </td>
+    </tr>
+<%
+user_price = 0
+user_total = 0
+%>
+    <% end %>
+    <tr style="border-top: 1px solid grey;">
+      <td style="font-weight: bold;">Summe</td>
+      <td><%= count %></td>
+      <td style="font-weight: bold;">€ <%= number_with_precision total %></td>
+  </tr>
+</table>
+<%
+count = 0
+price = 0
+total = 0
+%>
+<% reset_cycle() %>
+<% end %>
+<% else %>
+Noch keine Rechnungen vorhanden!<% end %>
+</div>

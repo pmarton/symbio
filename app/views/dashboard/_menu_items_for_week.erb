@@ -1,0 +1,61 @@
+<%
+# Get all relevant order states of the current user
+if user_signed_in?
+	orders = Order.where(:date => date, :user_id => current_user.id)
+	order_states = {}
+	orders.each do |order|
+		order_states[order.menu_item_id] = order.state
+	end
+end
+
+# Get all menu items for the current date range
+MenuItem.where(:date => date).order(:date, :sort_order).group_by{ |menu_item| menu_item.date }.each do |day, menu_items_per_day| %>
+
+	<% if day.today? then menu_class = :box end %>
+
+	<%= content_tag :div, :class => menu_class do %>
+
+		<h3><%= l(day, :format => :complete) %> <span class="orders_per_day" style="font-size: 80%;" title="Anzahl der Bestellenden">(<%= InvoiceItem.orders_per_day(day) %>)</span></h3>
+		
+		<% if (day.to_time + 12.hours - Order.offset) > Time.current then %>
+		<%# Order deadline %>
+		<div style="margin-top: -10px; margin-bottom: 10px;">
+	    	… noch bis <span style="font-weight: bold;"><%= l(day.to_time + 12.hours - Order.offset) %></span> bestellbar.
+		</div>
+		<%# /Order deadline %>
+		<% end %>
+		
+		<ul>
+			<% menu_items_per_day.each do |menu_item| %>
+	
+				<% if user_signed_in? %>
+
+					<% state = ""
+		
+					if order_states.include?(menu_item.id)
+						state = " " + order_states[menu_item.id]
+					end %>
+
+					<% if menu_item.orderable? %>
+						<li class="menu_item<%= state %>" id="menu_item_<%= menu_item.id.to_s %>">
+						<%= link_to menu_item.name, {:controller => "orders", :action => "toggle", :menu_item_id => menu_item.id, :format => :json}, :remote => true %>
+						<!-- &nbsp;<span>(<%= menu_item.orders.length.to_s %>)</span> -->
+						</li>
+					<% else %>
+						<li class="menu_item<%= state %>" id="menu_item_<%= menu_item.id.to_s %>">
+						<%= menu_item.name %>
+						<!-- &nbsp;<span>(<%= menu_item.orders.length.to_s %>)</span> -->
+						</li>
+					<% end %>
+
+				<% else # user not signed in %>
+					<li>
+					<%= menu_item.name %>
+					</li>
+				<% end # / user (not) signed in %>
+	
+			<% end # /each %>
+		</ul>
+		
+	<% end # /content_tag %>
+<% end # /each %>

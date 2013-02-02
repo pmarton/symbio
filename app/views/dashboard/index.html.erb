@@ -1,0 +1,55 @@
+<% if !user_signed_in? # Login box %>
+
+	<%= form_for("user", :url => user_session_path) do |f| %>
+	<div class="span-3 prepend-4">
+		<h3 style="margin-bottom: 0;">Anmelden</h3>
+	</div>
+	<div class="span-5">
+		<%= f.label :email, 'E-Mail' %><br/>
+		<%= f.email_field :email, :class => 'text span-5', :autofocus => true %>
+	</div>
+	<div class="span-5">
+		<%= f.label :password, 'Passwort' %><br/>
+		<%= f.password_field :password, :class => 'text span-5' %>
+	</div>
+	<div class="span-7 last">
+		<%= f.submit 'Anmelden', :style => 'margin-top: 26px;' %>
+	</div>
+	<div class="span-10 prepend-7 append-7 append-bottom last">
+		<%= f.check_box :remember_me %>
+		<%= f.label :remember_me, "Auf diesem Computer angemeldet bleiben" %>
+	</div>
+	<% end %>
+
+	<hr/>
+	
+<% end # /Login box %>
+
+
+<%# Menu items %>
+<div id="current_week" class="span-12 border">
+	<div class="span-11 append-1 last">
+
+		<h2>Menü für diese Woche</h2>
+
+		<%= render :partial => 'menu_items_for_week', :locals => { :date => Time.current.to_date.beginning_of_week..(Time.current.to_date.end_of_week - 2.days) } %>
+
+	</div>
+</div>
+
+
+<div id="next_week" class="span-11 prepend-1 last">
+
+	<h2>Menü für nächste Woche</h2>
+
+	<%= render :partial => 'menu_items_for_week', :locals => { :date => Time.current.to_date.next_week..(Time.current.to_date.next_week + 4.days) } %>
+
+</div>
+<%# /Menu items %>
+
+
+<%# Legend %>
+<div class="span-24 last" style="text-align: center; margin-top: 20px;">
+<em>*</em> vegane Speisen, <em>(G)</em> mit Gluten, <em>(L)</em> mit Laktose, <em>(N)</em> mit Nüssen, <em>(O)</em> mit Eiern
+</div>
+<%# /Legend %>

@@ -1,0 +1,29 @@
+<div class="span-22 prepend-1 append-1 last">
+	<h2>Speisekategorien</h2>
+	<table>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Preis
+			</th>
+			<th>
+				Sortier-Reihenfolge
+			</th>
+		</tr>
+		<% @meal_categories.each do |meal_category| %>
+		<tr>
+			<td>
+				<%=h meal_category.name %>
+			</td>
+			<td>
+				€ <%=h number_with_precision(meal_category.price) %>
+			</td>
+			<td>
+				<%=h meal_category.sort_order %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>

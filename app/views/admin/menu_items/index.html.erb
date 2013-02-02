@@ -1,0 +1,16 @@
+<div id="current_week" class="span-12 border">
+    <div class="span-11 append-1 last">
+
+        <h2>Menü für diese Woche</h2>
+
+		<%= render :partial => 'menu_items_for_week', :locals => { :date => Time.current.to_date.beginning_of_week..(Time.current.to_date.end_of_week - 2.days) } %>
+
+    </div>
+</div>
+
+<div id="next_week" class="span-11 prepend-1 last">
+    <h2>Menü für nächste Woche</h2>
+
+		<%= render :partial => 'menu_items_for_week', :locals => { :date => Time.current.to_date.next_week..(Time.current.to_date.next_week + 4.days) } %>
+
+</div>

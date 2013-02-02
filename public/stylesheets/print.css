@@ -1,0 +1,18 @@
+#uservoice-feedback, #header, #admin_menu, #admin_notification, #user_menu, hr {
+  display: none;
+}
+
+.new_page {
+  page-break-before: always;
+}
+
+.container > div > div > div {
+	display: none;
+}
+
+.container > div > div > div.box {
+	display: block;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+}

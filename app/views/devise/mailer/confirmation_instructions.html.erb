@@ -1,0 +1,5 @@
+<p>Herzlich Willkommen, <%= @resource.name %>!</p>
+
+<p>Bitte bestätige deinen neuen symbio-Account durch einen Klick auf den folgenden Link:</p>
+
+<p><%= link_to 'Meinen Account bestätigen', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

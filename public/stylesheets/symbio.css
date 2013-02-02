@@ -1,0 +1,134 @@
+body {
+	background-color: #fff;
+	color: #333;
+}
+
+pre {
+	background-color: #eee;
+	padding: 10px;
+	font-size: 11px;
+}
+
+a {
+	color: #357;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.fieldWithErrors {
+	padding: 2px;
+	background-color: red;
+	display: table;
+}
+
+#errorExplanation {
+	width: 400px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 12px;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+	text-align: left;
+	font-weight: bold;
+	padding: 5px 5px 5px 15px;
+	font-size: 12px;
+	margin: -7px;
+	background-color: #c00;
+	color: #fff;
+}
+
+#errorExplanation p {
+	color: #333;
+	margin-bottom: 0;
+	padding: 5px;
+}
+
+#errorExplanation ul li {
+	font-size: 12px;
+	list-style: square;
+}
+
+.table-border, .table-border > th, .table-border > td {
+	border: 1px solid grey;
+}
+
+ul {
+	list-style: none;
+}
+
+.menu ul {
+	list-style: none;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.menu ul, .menu ul li {
+	display: inline;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.menu ul li {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.menu ul li span {
+	font-weight: bold;
+}
+
+input.fieldWithErrorss {
+	background-color: #FBE3E4;
+}
+
+div.formError {
+	display: inline;
+}
+
+.alert {padding:.8em;margin-bottom:1em;border:2px solid #ddd;}
+.alert {background:#FBE3E4;color:#8a1f11;border-color:#FBC2C4;}
+.notice {background:#E6EFC2;color:#264409;border-color:#C6D880;}
+.alert a {color:#8a1f11;}
+.notice a {color:#264409;}
+
+.menu_item {
+	padding-left: 20px;
+}
+
+.new, .ordered, .cancelled {
+	font-weight: bold;
+}
+
+.new {
+	background: transparent url(/images/new.png) no-repeat left top;
+}
+
+.ordered {
+	background: transparent url(/images/ordered.png) no-repeat left top;
+}
+
+.cancelled {
+	background: transparent url(/images/cancelled.png) no-repeat left top;
+}
+
+.loading {
+	background: transparent url(/images/spinner.gif) no-repeat left top;
+}
+
+li.editable_menu_item {
+	line-height: 28px;
+}
+
+span.click_to_edit {
+	border-bottom: 1px dotted #ccc;
+}
+
+span.click_to_edit.status_ok {
+	border-bottom: 1px dotted #0c0;
+}
