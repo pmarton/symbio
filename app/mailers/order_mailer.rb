@@ -7,7 +7,7 @@ class OrderMailer < ActionMailer::Base
     @day = day
     @orders = Order.includes(:menu_item).where(:date => day, :state => ['ordered']).order('menu_items.sort_order ASC')
     mail(:to => ["kitchen@restaurant-ginko.at"],
-         :cc => ["office@restaurant-ginko.at", "pwetz@know-center.at", "patrick@hoefler.st"],
+         :cc => ["office@restaurant-ginko.at", "symbio@hoefler.st"],
          :subject => "Bestellung Know-Center für " + l(day, :format => :complete))
   end
   
