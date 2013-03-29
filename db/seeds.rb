@@ -9,8 +9,8 @@
 # Create the admin role and user
 
 if User.all.length == 0
-  admin_user = User.create!(:id => 1, :name => "Site Administrator", :email => "admin@symbio.xyz", :password => "test123", :password_confirmation => "test123", :admin => true)
-  regular_user = User.create!(:id => 2, :name => "Regular User", :email => "user@symbio.xyz", :password => "test123", :password_confirmation => "test123", :admin => false)
+  admin_user = User.create!(:id => 1, :name => "Site Administrator", :email => "admin@sym.bio", :password => "symbio", :password_confirmation => "symbio", :admin => true)
+  regular_user = User.create!(:id => 2, :name => "Regular User", :email => "user@sym.bio", :password => "symbio", :password_confirmation => "symbio", :admin => false)
 end
 
 # Add dummy content, mainly for testing
