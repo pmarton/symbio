@@ -15,6 +15,7 @@ Installation (incomplete)
 * Create a free account at [SendGrid](http://sendgrid.com/) and add your credentials to `.env`. If you prefer to use another SMTP server, edit `config/initializers/mail.rb` accordingly.
 * Run `foreman run rake db:setup`
 * Start the dev server with `foreman start`
-* Log in with your specified e-mail addresses and the password `symbio`.
+* Check your e-mail accounts for the activation e-mails. When you click the activation links, you should automatically be logged in to your local development setup.
+* After activating your accounts, you can also log in with your specified e-mail addresses and the password `symbio`.
 
 For productive deployment, I recommend [Heroku](http://www.heroku.com/).
