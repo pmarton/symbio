@@ -1,0 +1,8 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: symbio_dev
+  pool: 5
+  username: symbio
+  password:
+  socket: /tmp/mysql.sock
