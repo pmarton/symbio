@@ -35,6 +35,10 @@ de-AT:
       long: ! '%e. %B %Y'
       short: ! '%e. %b'
       complete: ! '%A, %e. %B %Y'
+      only_day: ! '%e'
+      only_month: ! '%B'
+      month_year: ! '%B %Y'
+      short_with_weekday: ! '%a, %d.%m.'
     month_names:
     - 
     - Jänner
