@@ -11,9 +11,9 @@ end
 # Get all menu items for the current date range
 MenuItem.where(:date => date).order(:date, :sort_order).group_by{ |menu_item| menu_item.date }.each do |day, menu_items_per_day| %>
 
-	<% if day.today? then menu_class = :box end %>
+	<% if day.today? then menu_id = :today and menu_class = :box end %>
 
-	<%= content_tag :div, :class => menu_class do %>
+	<%= content_tag :div, :id => menu_id, :class => menu_class do %>
 
 		<h3><%= l(day, :format => :complete) %> <span class="orders_per_day" style="font-size: 80%;" title="Anzahl der Bestellenden">(<%= InvoiceItem.orders_per_day(day) %>)</span></h3>
 		
