@@ -132,3 +132,7 @@ span.click_to_edit {
 span.click_to_edit.status_ok {
 	border-bottom: 1px dotted #0c0;
 }
+
+.past {
+	display: none;
+}
