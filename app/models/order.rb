@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   # Define the order deadline in relation to 12:00 of the respective day
   # The deadline is then 12:00 of the respective day - Order.offset
   def Order.offset
-    3.hours
+    2.hours
   end
   
   # Define the day of the most recent order
