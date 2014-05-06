@@ -12,17 +12,29 @@
 			<th>
 				E-Mail
 			</th>
+			<th>
+				Guthaben
+			</th>
 		</tr>
 		<% @users.each do |user| %>
 		<tr>
 			<td>
-				<%=h user.id %>
+				<%= h user.id %>
 			</td>
 			<td>
-				<%=h user.name %>
+				<%= link_to user.name, admin_user_path(user) %>
 			</td>
 			<td>
-				<%=h user.email %>
+				<%= h user.email %>
+			</td>
+			<td style='text-align: right;'>
+				<% if user.balance != nil and user.balance < 0 %>
+					<span style='color: #ff0000;'>
+				<% end %>
+				<%= number_to_currency(user.balance, :locale => 'de-AT') %>
+				<% if user.balance != nil and user.balance < 0 %>
+					</span>
+				<% end %>
 			</td>
 		</tr>
 		<% end %>

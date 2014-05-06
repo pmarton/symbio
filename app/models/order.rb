@@ -8,20 +8,20 @@ class Order < ActiveRecord::Base
   validates_presence_of :date, :user_id, :menu_item_id, :meal_category_id
   
   include AASM
-  aasm_column :state
-  aasm_initial_state :initial => :new
-  aasm_state :new
-  aasm_state :ordered
-  aasm_state :cancelled
-  
-  aasm_event :order do
-    transitions :from => :new, :to => :ordered
+  aasm :column => 'state' do
+    state :new, :initial => true
+    state :ordered
+    state :cancelled
+
+    event :order do
+      transitions :from => :new, :to => :ordered
+    end
+    
+    event :cancel do
+      transitions :from => :new, :to => :cancelled
+    end
   end
-  
-  aasm_event :cancel do
-    transitions :from => :new, :to => :cancelled
-  end
-  
+
   # Define the order deadline in relation to 12:00 of the respective day
   # The deadline is then 12:00 of the respective day - Order.offset
   def Order.offset

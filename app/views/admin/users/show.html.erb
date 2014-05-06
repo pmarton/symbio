@@ -1,0 +1,21 @@
+<div class="span-22 prepend-1 append-1 last">
+
+	<h2><%= h @user.name %></h2>
+
+	<h3>Aktuelles Guthaben</h3>
+	<p>
+		<% if @user.balance != nil and @user.balance < 0 %>
+			<span style='color: #ff0000;'>
+		<% end %>
+		<%= number_to_currency(@user.balance, :locale => 'de-AT') %>
+		<% if @user.balance != nil and @user.balance < 0 %>
+			</span>
+		<% end %>
+	</p>
+
+	<h3>Guthaben aufladen</h3>
+	<p>… coming soon!</p>
+	 
+	<%= link_to 'Zurück zur Benutzerübersicht', admin_users_path %>
+
+</div>

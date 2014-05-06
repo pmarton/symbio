@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110103001525) do
+ActiveRecord::Schema.define(:version => 20140506213417) do
+
+  create_table "financial_transactions", :force => true do |t|
+    t.datetime "datetime"
+    t.integer  "user_id"
+    t.decimal  "amount",   :precision => 5, :scale => 2
+    t.string   "comment"
+  end
 
   create_table "invoice_items", :force => true do |t|
     t.date     "date"
@@ -62,14 +69,15 @@ ActiveRecord::Schema.define(:version => 20110103001525) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                               :default => "",    :null => false
-    t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
-    t.string   "password_salt",                       :default => "",    :null => false
+    t.string   "email",                                                               :default => "",    :null => false
+    t.string   "encrypted_password",     :limit => 128,                               :default => "",    :null => false
+    t.string   "password_salt",                                                       :default => "",    :null => false
     t.string   "name"
     t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                                                       :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -78,9 +86,10 @@ ActiveRecord::Schema.define(:version => 20110103001525) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "authentication_token"
-    t.boolean  "admin",                               :default => false
+    t.boolean  "admin",                                                               :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "balance",                               :precision => 5, :scale => 2
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
