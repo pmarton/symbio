@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '~> 3.2.0'
 gem 'mysql2'
 gem 'aasm'
-gem 'devise', '~> 3.0.2'
+gem 'devise', '~> 3.0.0'
 gem 'devise-encryptable'
 gem 'tabs_on_rails'
 gem 'jquery-rails'
@@ -13,7 +13,7 @@ gem 'prototype-rails'
 group :development, :test do
   gem 'rspec-rails'
   # gem 'factory_girl_rails'
-  gem 'capybara'
+  # gem 'capybara'
   gem 'database_cleaner'
   gem 'foreman'
 end
@@ -23,5 +23,5 @@ group :development do
 end
 
 group :test do
-  gem 'cucumber-rails'
+  # gem 'cucumber-rails'
 end
