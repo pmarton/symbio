@@ -38,7 +38,7 @@ MenuItem.where(:date => date).order(:date, :sort_order).group_by{ |menu_item| me
 						state = " " + order_states[menu_item.id]
 					end %>
 
-					<% if menu_item.orderable? %>
+					<% if menu_item.orderable? and current_user.balance.to_f > 0 %>
 						<li class="menu_item<%= state %>" id="menu_item_<%= menu_item.id.to_s %>">
 						<%= link_to menu_item.name, {:controller => "orders", :action => "toggle", :menu_item_id => menu_item.id, :format => :json}, :remote => true %>
 						<!-- &nbsp;<span>(<%= menu_item.orders.length.to_s %>)</span> -->

@@ -72,6 +72,18 @@
                 <%= tab.pricelist 'Preisliste', pricelist_path %>
                 <% end %>
             </div>
+            <hr/>
+            <div id="user_balance" class="span-20 prepend-2 append-2 append-bottom last menu" style="text-align: center;">
+            Aktuelles Guthaben:
+            <% if current_user.balance.to_f <= 0 %>
+                <span style='color: #ff0000;'>
+            <% end %>
+            <span id="balance"><%= number_to_currency(current_user.balance.to_f, :locale => 'de-AT') %></span>
+            <% if current_user.balance.to_f <= 0 %>
+                </span>
+                | Bitte aufladen, um Bestellungen vorzunehmen!
+            <% end %>
+            </div>
             <% end %>
             <hr/>
             <div class="span-24 last">

@@ -10,6 +10,7 @@ Symbio::Application.routes.draw do
 
   namespace :admin do # admins only
     match 'orders/by_month', :as => :orders_by_month
+    match 'users/top_up'
     resources :orders
     resources :invoice_items
     resources :menu_items do

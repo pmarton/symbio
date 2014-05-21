@@ -2,10 +2,7 @@
 
 	<h2>Benutzer</h2>
 	<table>
-		<tr>
-			<th>
-				ID
-			</th>
+		<tr style="border-bottom: 1px solid grey;">
 			<th>
 				Name
 			</th>
@@ -17,10 +14,7 @@
 			</th>
 		</tr>
 		<% @users.each do |user| %>
-		<tr>
-			<td>
-				<%= h user.id %>
-			</td>
+		<tr class="<%= cycle("even", "odd") -%>">
 			<td>
 				<%= link_to user.name, admin_user_path(user) %>
 			</td>
@@ -28,11 +22,11 @@
 				<%= h user.email %>
 			</td>
 			<td style='text-align: right;'>
-				<% if user.balance != nil and user.balance < 0 %>
+				<% if user.balance.to_f <= 0 %>
 					<span style='color: #ff0000;'>
 				<% end %>
-				<%= number_to_currency(user.balance, :locale => 'de-AT') %>
-				<% if user.balance != nil and user.balance < 0 %>
+				<%= number_to_currency(user.balance.to_f, :locale => 'de-AT') %>
+				<% if user.balance.to_f <= 0 %>
 					</span>
 				<% end %>
 			</td>

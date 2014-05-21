@@ -4,18 +4,24 @@
 
 	<h3>Aktuelles Guthaben</h3>
 	<p>
-		<% if @user.balance != nil and @user.balance < 0 %>
+		<% if @user.balance.to_f <= 0 %>
 			<span style='color: #ff0000;'>
 		<% end %>
-		<%= number_to_currency(@user.balance, :locale => 'de-AT') %>
-		<% if @user.balance != nil and @user.balance < 0 %>
+		<span id="balance"><%= number_to_currency(@user.balance.to_f, :locale => 'de-AT') %></span>
+		<% if @user.balance.to_f <= 0 %>
 			</span>
 		<% end %>
 	</p>
 
 	<h3>Guthaben aufladen</h3>
-	<p>… coming soon!</p>
+	<%= form_for @user, url: {action: "top_up"} do |f| %>
+		€ <input type="text" size="5" autofocus name="amount" />
+		<input type="hidden" name="user_id" value="<%= @user.id %>" />
+		<%= f.submit "Aufladen" %>
+	<% end %>
 	 
-	<%= link_to 'Zurück zur Benutzerübersicht', admin_users_path %>
+	<p style="margin-top: 2em;">
+		<%= link_to 'Zurück zur Benutzerübersicht', admin_users_path %>
+	</p>
 
 </div>

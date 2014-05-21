@@ -17,6 +17,7 @@ class InvoiceItem < ActiveRecord::Base
           item.price += order.menu_item.price
         end
         item.set_rebate!
+        FinancialTransaction.execute(user_id, -(item.price - item.rebate), "Invoice Item " + item.id.to_s)
       else
         orders.each do |order|
           order.cancel!
@@ -26,7 +27,6 @@ class InvoiceItem < ActiveRecord::Base
   end
   
   def InvoiceItem.generate_invoices
-  
     Order.includes(:user).where(:date => (Time.current.to_date - 7.days)..(Order.most_recent_order_day), :state => 'new').each do |order|
       # Check if the order still has no invoice item, could have already been generated if there are more orders of one user on a single day
       if order.invoice_item == nil
