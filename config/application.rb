@@ -18,24 +18,24 @@ module Symbio
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-    
+
     # Activate observers that should always be running
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-    
+
     # Set secret cookie token
     config.secret_token = ENV['SECRET_TOKEN']
-    
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names.
     # config.time_zone = 'UTC'
     config.time_zone = 'Vienna'
-    
-    config.i18n.enforce_available_locales = true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
-    config.i18n.default_locale = 'de-AT'
-    
+    config.i18n.enforce_available_locales = false
+    config.i18n.available_locales = ["de-AT"]
+    config.i18n.default_locale = :'de-AT'
+
     # JavaScript files you want as :defaults (application.js is always included).
     config.action_view.javascript_expansions[:defaults] = %w(jquery-1.4.4.min jquery-ui-1.8.7.custom.min rails autocomplete-rails)
 
@@ -44,7 +44,7 @@ module Symbio
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
+
     # Error handling in views
     require 'action_view'
     ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
@@ -58,9 +58,9 @@ module Symbio
       end
       html_tag
     end
-    
+
     # Disable precompiling assets for Heroku
     config.assets.initialize_on_precompile = false
-    
+
   end
 end
