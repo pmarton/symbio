@@ -8,15 +8,18 @@ class InvoiceItem < ActiveRecord::Base
   def InvoiceItem.build(date, user_id)
     orders = Order.where(:date => date, :user_id => user_id, :state => 'new')
     if orders.length > 0
-      if orders_per_day(date) >= 3
+      price_sum = 0
+      orders.each do |order|
+        price_sum += order.menu_item.price
+      end
+      if orders_per_day(date) >= 3 || price_sum >= 16
         item = InvoiceItem.create(:date => date, :user_id => user_id)
-        item.price = 0
         item.orders << orders
         orders.each do |order|
           order.order!
-          item.price += order.menu_item.price
         end
-        item.set_rebate!
+        item.price = price_sum
+      	item.set_rebate!
       else
         orders.each do |order|
           order.cancel!
