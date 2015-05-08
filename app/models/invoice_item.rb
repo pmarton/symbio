@@ -58,26 +58,27 @@ class InvoiceItem < ActiveRecord::Base
 
   end
 
-  def InvoiceItem.invoice_sum_per_day(date)
-    sum = 0
-    (Order.where(:date => date)) do |order|
-      sum += order.price
-    end
 
-    # Get all orders with main dish but without salad with no rebate
-    md_orders = Order.includes(:invoice_item).where(:date => date, :state => 'ordered', :meal_category_id => [2,3,4,5,10,11], :invoice_items => {:rebate => 0}).order("orders.created_at")
-
-    # Get all orders with salad but without main dish with no rebate
-    s_orders = Order.includes(:invoice_item).where(:date => date, :state => 'ordered', :meal_category_id => [6,9], :invoice_items => {:rebate => 0}).order("orders.created_at")
-
-    # Add the rebate to the eligible invoice items
-
-    [md_orders.count, s_orders.count].min.times do |x|
-      sum -= 1
-    end
-    
-    return sum
-  end
+  #def InvoiceItem.invoice_sum_per_day(date)
+  #  sum = 0
+  #  (Order.where(:date => date)) do |order|
+  #    sum += order.price
+  #  end
+#
+  #  # Get all orders with main dish but without salad with no rebate
+  #  md_orders = Order.includes(:invoice_item).where(:date => date, :state => 'ordered', :meal_category_id => [2,3,4,5,10,11], :invoice_items => {:rebate => 0}).order("orders.created_at")
+#
+  #  # Get all orders with salad but without main dish with no rebate
+  #  s_orders = Order.includes(:invoice_item).where(:date => date, :state => 'ordered', :meal_category_id => [6,9], :invoice_items => {:rebate => 0}).order("orders.created_at")
+#
+  #  # Add the rebate to the eligible invoice items
+#
+  #  [md_orders.count, s_orders.count].min.times do |x|
+  #    sum -= 1
+  #  end
+#
+  #  return sum
+  #end
 
   def InvoiceItem.orders_per_day(date)
     # How many orders are there for the given day?
