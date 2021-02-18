@@ -1,7 +1,7 @@
 symbio | eat better together
 ============================
 
-symbio is a simple collaborative food ordering system written in Ruby on Rails.
+symbio is a simple collaborative food ordering system written in Ruby on Rails!
 
 It is [licensed under the MIT License](LICENSE).
 
