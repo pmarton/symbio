@@ -19,5 +19,6 @@ Installation (incomplete)
 * Start the dev server with `foreman start`
 * Check your e-mail accounts for the activation e-mails. When you click the activation links, you should automatically be logged in to your local development setup.
 * After activating your accounts, you can also log in with your specified e-mail addresses and the password `symbio`.
+* env in Heroku are set via settings tab
 
 For productive deployment, I recommend [Heroku](http://www.heroku.com/).
